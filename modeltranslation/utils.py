@@ -33,7 +33,7 @@ def get_language_bidi(lang):
     """
     Check if a language is bi-directional.
     """
-    lang_info = get_language_info(lang)
+    lang_info = get_language_info(modified_language_converter(lang))
     return lang_info['bidi']
 
 
@@ -47,15 +47,10 @@ def modified_language_converter(lang: str) -> str:
             name_language = name
             break
 
-    basic_lang = None
-    for code, info in LANG_INFO:
-        if info['name'] == name_language:
+    basic_lang = lang
+    for code, info in LANG_INFO.items():
+        if 'name' in info.keys() and info['name'] == name_language:
             basic_lang = code
-
-    if basic_lang is None:
-        KeyError(
-            'Not found key'
-        )
 
     return basic_lang
 

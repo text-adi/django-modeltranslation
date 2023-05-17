@@ -549,3 +549,12 @@ class SpecificLanguageModelRegisterY(models.Model):
     title_y = models.CharField(max_length=255, default='')
     text = models.TextField(blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
+
+
+# Model for special language
+
+
+class SpecificLanguageCodeModel(models.Model):
+    title = models.CharField(max_length=255, default='')
+    text = models.TextField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
