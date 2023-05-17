@@ -338,3 +338,9 @@ class SpecificLanguageTranslationOptionsX(TranslationOptions):
 @register(models.SpecificLanguageModelRegisterY, languages=['en'])
 class SpecificLanguageTranslationOptionsY(TranslationOptions):
     fields = ('slug',)
+
+
+# ######### Specific language code for the model
+@register(models.SpecificLanguageCodeModel, languages=['en', 'de', 'ua'])
+class SpecificLanguageCodeTranslationOptions(TranslationOptions):
+    fields = ('title',)
