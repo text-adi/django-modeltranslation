@@ -1,5 +1,6 @@
 from contextlib import contextmanager
-
+from django.conf import settings as _settings
+from django.conf.locale import LANG_INFO
 from django.db import models
 from django.utils.encoding import force_str
 from django.utils.translation import get_language as _get_language
@@ -34,6 +35,29 @@ def get_language_bidi(lang):
     """
     lang_info = get_language_info(lang)
     return lang_info['bidi']
+
+
+def modified_language_converter(lang: str) -> str:
+    """
+    Returns the original language code
+    """
+    name_language = ''
+    for code, name in _settings.LANGUAGES:
+        if code == lang:
+            name_language = name
+            break
+
+    basic_lang = None
+    for code, info in LANG_INFO:
+        if info['name'] == name_language:
+            basic_lang = code
+
+    if basic_lang is None:
+        KeyError(
+            'Not found key'
+        )
+
+    return basic_lang
 
 
 def get_translation_fields(field):
